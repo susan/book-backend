@@ -3,7 +3,8 @@ class Api::V1::BooksController < ApplicationController
 
   def create
   	if curr_user
-      @book = Book.find_by(params[:id])
+  		#byebug
+      @book = Book.find_by(:title => params[:book][:title])
         if !@book
          @book = Book.create(book_params)
         end
