@@ -3,9 +3,10 @@ class Api::V1::AuthController <ApplicationController
 
 	def create
       @user = User.find_by(email: login_user_params[:email])
+      @cart = Cart.find_by(:user_id => @user.id)
       if @user && @user.authenticate(login_user_params[:password])
         token = encode_token({ user_id: @user.id })
-        render json: { user: @user, jwt: token }, status: :accepted
+        render json: { user: @user, cart: @cart, jwt: token }, status: :accepted
       else
         render json: { message: 'Invalid email or password' }, status: :unauthorized
       end

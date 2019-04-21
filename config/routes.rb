@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   	namespace :v1 do
   		resources :books
   		resources :carts
-      resources :users
-  		#post "/users", to: "users#create"
+      #resources :users
+  		post "/users", to: "users#create"
   		post "/login", to: "auth#create"
       get '/curr_user', to: "auth#show"
 
