@@ -1,4 +1,4 @@
 class Cart < ApplicationRecord
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
   has_many :books, through: :line_items
 end
