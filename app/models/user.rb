@@ -1,4 +1,4 @@
 class User < ApplicationRecord
-	has_many :carts, dependent: :destroy
+	has_one :cart, dependent: :destroy
 	has_secure_password
 end

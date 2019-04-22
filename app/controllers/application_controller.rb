@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
   def auth_header
    request.headers['Authorization']
   end
-
+  #when get routes get decoded token ('the wristband')
   def decoded_token
     if auth_header
   	  token = auth_header.split(" ")[1]
