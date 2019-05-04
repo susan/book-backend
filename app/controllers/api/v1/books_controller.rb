@@ -1,6 +1,11 @@
 class Api::V1::BooksController < ApplicationController
   before_action :curr_user, only: [:create]
 
+  def index
+    @books = Book.all
+  end
+
+
   def create
   	if curr_user
   		#byebug
@@ -8,9 +13,9 @@ class Api::V1::BooksController < ApplicationController
         if !@book
          @book = Book.create(book_params)
         end
-      create_line_item(@book, curr_user)
+      @line_item = create_line_item(@book, curr_user)
       if @line_item.save
-        render json: @line_item, status: :created
+        render json: {book: @book, line_item: @line_item }, status: :created
       else
      	  render json: { errors: @line_item.errors.full_messages }, status: :unprocessible_entity
       end
