@@ -6,9 +6,8 @@ class Api::V1::LineItemsController < ApplicationController
 
     @line_items = LineItem.all
      if @line_item.cart.user === curr_user
-      #byebug
         @line_item.destroy
-        render json: @line_item, status: :deleted
+        render json: @line_item, status: :ok
      else
       render json: { errors: @line_item.errors.full_messages }, status: :unprocessible_entity
      end
