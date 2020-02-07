@@ -1,5 +1,5 @@
 class Api::V1::LineItemsController < ApplicationController
-   before_action :curr_user, only: [:create, :destroy]
+   before_action :curr_user, only: [:destroy]
 
   def destroy
     @line_item = LineItem.find(params[:id])
@@ -13,7 +13,8 @@ class Api::V1::LineItemsController < ApplicationController
      end
   end
 
-	private
+  private
+  
   def line_item_params
   	 params.require(:line_item).permit(:id, :quantity, :book_id, :cart_id)
   end

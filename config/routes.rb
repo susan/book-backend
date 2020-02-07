@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :books
   		post "/users", to: "users#create"
   		post "/login", to: "auth#create"
-      get '/curr_user', to: "auth#show"
+      get "/curr_user", to: "auth#show"
   	end
   end
 
