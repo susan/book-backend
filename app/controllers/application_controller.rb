@@ -37,6 +37,4 @@ class ApplicationController < ActionController::API
     redirect_to "/welcome" unless logged_in?
   end
 
-
-
 end
