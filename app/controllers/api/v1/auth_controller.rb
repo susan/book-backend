@@ -14,7 +14,7 @@ class Api::V1::AuthController <ApplicationController
     if @user
       render json: { user: @user, line_items: @user.cart.line_items, cart_items: @user.cart.books }, status: :accepted
     else
-      render json: { message: 'not logged in' }, status: :ok
+      render json: { message: 'not logged in' }, status: :unauthorized
     end
   end
 

@@ -15,10 +15,10 @@ class Api::V1::BooksController < ApplicationController
          @book = Book.create(book_params)
         end
       @line_item = create_line_item(@book, curr_user)
-      if @line_item.save
+      if @line_item
         render json: {book: @book, line_item: @line_item }, status: :created
       else
-     	  render json: { errors: @line_item.errors.full_messages }, status: :unprocessible_entity
+     	  render json: { errors: @line_item.errors.full_messages }, status: :not_acceptable
       end
    end
   end

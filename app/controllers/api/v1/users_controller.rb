@@ -1,12 +1,12 @@
 class Api::V1::UsersController < ApplicationController
   #before_action :find_user, only: [:show]
 
-  def index
-  end
+  # def index
+  # end
 
-  def show
-    #find_user
-  end
+  # def show
+  #   #find_user
+  # end
 
    def create
       @user = User.create(user_params)
@@ -29,8 +29,8 @@ class Api::V1::UsersController < ApplicationController
   	 params.require(:user).permit(:id, :email, :password)
   end
 
-  def find_user
-    @user = User.find(params[:id])
-  end
+  # def find_user
+  #   @user = User.find(params[:id])
+  # end
 
 end
