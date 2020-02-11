@@ -1,18 +1,29 @@
 class Api::V1::LineItemsController < ApplicationController
-   before_action :curr_user, only: [:destroy]
+   before_action :curr_user, only: [:update]
 
-  def destroy
-    @line_item = LineItem.find(params[:id])
-
-    @line_items = LineItem.all
-     if @line_item.cart.user === curr_user
-        @line_item.destroy
-        render json: @line_item, status: :ok
+  def update
+     @line_item = LineItem.find(params[:id])
+     if curr_user && update_line_item(curr_user, @line_item)
+      @line_items=curr_user.cart.line_items
+      @books = curr_user.cart.books
+       render json: {line_items: @line_items, books: @books}, status: :ok
      else
-      render json: { errors: @line_item.errors.full_messages }, status: :unprocessible_entity
+      render json: { errors: @line_item.errors.full_messages }, status: :unprocessable_entity
      end
   end
 
+  def update_line_item(current_user, line_item) 
+    if line_item.cart.user === current_user 
+      if line_item.quantity > 1
+         line_item.quantity -= 1
+         line_item.save
+      else
+        line_item.destroy
+        line_item
+      end
+      line_item
+    end
+end           
   private
   
   def line_item_params
@@ -20,32 +31,6 @@ class Api::V1::LineItemsController < ApplicationController
   end
 
 end
-
-
-#   def create
-#   	if curr_user
-#      @line_item = LineItem.new(line_item_params)
-#      @line_item.user= curr_user
-#   end
-
-#   def add_book(book)
-#   	@book =Book.create(book)
-# #take out user_id so would have to get it from front end
-
-#
-
-# def destroy(item)
-# 	@line_item = LineItem.all.find do |element|
-# 	  element.book_id === item.book_id &&
-# 	  element.cart_id === item.user_id
-# 	end
-# 	@line_item.destroy
-# 	if @line_item.destroy
-#     render json: @line_item, status: :deleted
-#   else
-#      render json: { errors: @line_item.errors.full_messages }, status: :unprocessible_entity
-#   end)
-# end
 
 
 

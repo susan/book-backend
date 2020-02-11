@@ -27,12 +27,12 @@ class ApplicationController < ActionController::API
     end
   end
 
-  def logged_in?
-    !!curr_user
-  end
+  # def logged_in?
+  #   !!curr_user
+  # end
 
-  def authorized
-    redirect_to "/welcome" unless logged_in?
-  end
+  # def authorized
+  #   redirect_to "/welcome" unless logged_in?
+  # end
 
 end
